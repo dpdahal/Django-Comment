@@ -1,0 +1,21 @@
+<div {% if comment.get_comments %} style="padding-left: 30px;" {% endif %}>
+    <p>{{ comment.name }}</p>
+    <p>{{ comment.body }}</p>
+
+    <form method="post" action="" class="mt-3">
+        {% csrf_token %}
+        <input type="hidden" name="parent" value="{{ comment.id }}">
+        <input type="text" name="name"> <br><br>
+        <textarea name="body"></textarea><br><br>
+
+        <div>
+            <button class="btn btn-primary btn-sm">Reply</button>
+
+        </div>
+    </form>
+
+    {% for comment in comment.get_comments %}
+        {% include 'comment.html' with comment=comment %}
+    {% endfor %}
+
+</div>
